@@ -115,7 +115,7 @@ The following diagram illustrates the complete decision-making flow, including t
 ```mermaid
 graph TD
     Start([Start Propagate]) --> Init[Initialize State]
-    Init --> MarketAN[Market Analyst\n(Mandatory Context)]
+    Init --> MarketAN["Market Analyst<br/>(Mandatory Context)"]
     
     MarketAN -->|Regime Detected| Router{Select Analysts}
     
@@ -138,23 +138,23 @@ graph TD
     
     FinalState --> OverrideLogic{HARD GATE LOGIC}
     
-    OverrideLogic -- SELL Signal --> CheckSell{Slope > 0 & Growth > 30%?}
-    CheckSell -- YES --> BlockSell[🛑 BLOCK SELL (Anti-Short)]
-    CheckSell -- NO --> AllowSell[✅ Allow SELL]
+    OverrideLogic -- SELL Signal --> CheckSell{"Slope > 0 & Growth > 30%?"}
+    CheckSell -- YES --> BlockSell["🛑 BLOCK SELL (Anti-Short)"]
+    CheckSell -- NO --> AllowSell["✅ Allow SELL"]
     
-    OverrideLogic -- BUY Signal --> CheckBuy{Insiders Selling > $50M?}
-    CheckBuy -- YES --> BlockBuy[🛑 BLOCK BUY (Anti-Knife)]
-    CheckBuy -- NO --> AllowBuy[✅ Allow BUY]
+    OverrideLogic -- BUY Signal --> CheckBuy{"Insiders Selling > $50M?"}
+    CheckBuy -- YES --> BlockBuy["🛑 BLOCK BUY (Anti-Knife)"]
+    CheckBuy -- NO --> AllowBuy["✅ Allow BUY"]
     
     BlockSell & AllowSell & BlockBuy & AllowBuy --> PortfolioCheck{Portfolio Check}
     
-    PortfolioCheck -- Active Position --> StopLoss{Unrealized PnL < -10%?}
-    StopLoss -- YES --> KillSwitch[☠️ FORCE LIQUIDATE (Rule 72)]
+    PortfolioCheck -- Active Position --> StopLoss{"Unrealized PnL < -10%?"}
+    StopLoss -- YES --> KillSwitch["☠️ FORCE LIQUIDATE (Rule 72)"]
     StopLoss -- NO --> Execute[Execute Order]
     
     style MarketAN fill:#6f0,stroke:#333,stroke-width:2px
-    style BlockSell fill:#f00,stroke:#fff,stroke-width:2px,color:#white
-    style BlockBuy fill:#f00,stroke:#fff,stroke-width:2px,color:#white
+    style BlockSell fill:#f00,stroke:#fff,stroke-width:2px,color:#fff
+    style BlockBuy fill:#f00,stroke:#fff,stroke-width:2px,color:#fff
     style KillSwitch fill:#000,stroke:#f00,stroke-width:2px,color:#fff
 ```
 
